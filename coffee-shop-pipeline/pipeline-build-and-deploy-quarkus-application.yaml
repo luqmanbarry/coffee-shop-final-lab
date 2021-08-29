@@ -7,7 +7,7 @@ spec:
   - name: OCP_USER
     type: string
     description: OCP_USER of the student
-    default: GUID
+    default: fcrp7
   - name: APP_NAME
     type: string
     description: The application deployment name
@@ -27,7 +27,7 @@ spec:
   - name: KUSTOMIZE_GIT_URL
     type: string
     description: The kustomize git repository url
-    default: http://homework-gitea.gpte-hw-cicd.svc:3000/OCP_USERNAME-GUID/coffee-shop-final-lab.git
+    default: http://homework-gitea.gpte-hw-cicd.svc:3000/lbarry-redhat.com-fcrp7/coffee-shop-final-lab.git
   - name: KUSTOMIZE_GIT_REVISION
     type: string
     default: master
@@ -47,11 +47,11 @@ spec:
   - name: NEXUS_REGISTRY_URL
     type: string
     description: External URL for the container registry to set the production image from
-    default: NEXUS_REGISTRY_HOSTNAME
+    default: homework-nexus-registry.apps.shared-dev4.dev4.openshift.opentlc.com
   - name: NAMESPACE_DEV
     type: string
     description: Namespace where the buildconfig is located
-    default: GUID-dev-coffeeshop
+    default: fcrp7-dev-coffeeshop
   results:
   - name: image-tag
     description: The Production Image Tag
