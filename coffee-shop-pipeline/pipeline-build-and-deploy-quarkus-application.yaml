@@ -196,6 +196,30 @@ spec:
     - name: images-url
       workspace: images-url
 
+  - name: set-image-in-prod
+    runAfter:
+    - publish-image
+    taskRef:
+      kind: ClusterTask
+      name: tkn
+    params:
+    - name: NAMESPACE_PROD
+      value: fcrp7-prod-coffeeshop
+    - name: ARGS
+      value:
+      - "pipeline"
+      - "start"
+      - "deploy-quarkus-application"
+      - "--param"
+      - "DEPLOY_SERVERLESS=$(params.DEPLOY_SERVERLESS)"
+      - "--param"
+      - "APP_NAME=$(params.APP_NAME)"
+      - "--param"
+      - "NAMESPACE=$(NAMESPACE_PROD)"
+      - --param
+      - "IMAGE=homework-nexus-registry.gpte-hw-cicd.svc:5000/$(params.OCP_USER)-$(params.APP_NAME):prod-$(tasks.generate-tag.results.image-tag)"
+      - "--showlog"
+
   - name: update-kustomize-repo
     runAfter:
     - publish-image
