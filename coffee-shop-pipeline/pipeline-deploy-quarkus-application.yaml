@@ -4,17 +4,7 @@ metadata:
   name: deploy-quarkus-application
 spec:
   params:
-  - name: DEPLOY_Stkn pipeline start build-and-deploy-quarkus-application \
-    --use-param-defaults \
-    --param APP_NAME=coffee-shop \
-    --param KUSTOMIZE_GIT_CONTEXT_DIR=coffee-shop-kustomize/coffee-shop \
-    --param KUSTOMIZE_GIT_FILE_NAME=overlays/production/deployment-patches.yaml \
-    --workspace name=app-source,claimName=workspace-pvc \
-    --workspace name=maven-settings,emptyDir= \
-    --workspace name=images-url,emptyDir= \
-    --pod-template=$HOME/coffee-shop-final-lab/coffee-shop-pipeline/pod-template.yaml \
-    --showlog \
-    -n ${PREFIX}-pipelineERVERLESS
+  - name: DEPLOY_SERVERLESS
     type: string
     description: Flag to indicate whether to run deploy-serverless step or not
     default: "false"
@@ -30,11 +20,6 @@ spec:
     type: string
     description: Iamge name, including tag
     default: image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE)/$(params.APP_NAME):dev-$(tasks.generate-tag.results.image-tag)
-
-  results:
-  - name: image-tag
-    description: The Production Image Tag
-    value: dev-$(tasks.generate-tag.results.image-tag)
 
 
   tasks:

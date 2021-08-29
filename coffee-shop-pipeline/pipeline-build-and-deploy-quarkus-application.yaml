@@ -55,7 +55,7 @@ spec:
   - name: NAMESPACE_DEV
     type: string
     description: Namespace where the buildconfig is located
-    default: t4f2h-dev-coffeeshop
+    default: fcrp7-dev-coffeeshop
   results:
   - name: image-tag
     description: The Production Image Tag
@@ -151,18 +151,18 @@ spec:
     params:
     - name: ARGS
       value:
-      - pipeline
-      - start
-      - deploy-quarkus-application
+      - "pipeline"
+      - "start"
+      - "deploy-quarkus-application"
+      - "--param"
+      - "DEPLOY_SERVERLESS=$(params.DEPLOY_SERVERLESS)"
+      - "--param"
+      - "APP_NAME=$(params.APP_NAME)"
+      - "--param"
+      - "NAMESPACE=$(params.NAMESPACE_DEV)"
       - --param
-      - NAMESPACE=$(params.NAMESPACE_DEV)
-      - --param
-      - APP_NAME=$(params.APP_NAME)
-      - --param
-      - DEPLOY_SERVERLESS=$(params.DEPLOY_SERVERLESS)
-      - --param
-      - IMAGE=image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE_DEV)/$(params.APP_NAME):dev-$(tasks.generate-tag.results.image-tag)
-      - --showlog
+      - "IMAGE=image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE_DEV)/$(params.APP_NAME):dev-$(tasks.generate-tag.results.image-tag)"
+      - "--showlog"
 
   - name: tag-image-for-production
     runAfter:
