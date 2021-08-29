@@ -222,7 +222,8 @@ spec:
 
   - name: update-kustomize-repo
     runAfter:
-    - publish-image
+    # - publish-image
+    - set-image-in-prod
     taskRef:
       kind: Task
       name: update-kustomize-repo
