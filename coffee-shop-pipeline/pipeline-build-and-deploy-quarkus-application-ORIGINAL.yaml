@@ -4,14 +4,10 @@ metadata:
   name: build-and-deploy-quarkus-application
 spec:
   params:
-  - name: DEPLOY_SERVERLESS
-    type: string
-    description: A flag to indicate whether to deploy knative or not
-    default: "false"
   - name: OCP_USER
     type: string
     description: OCP_USER of the student
-    default: t4f2h
+    default: fcrp7
   - name: APP_NAME
     type: string
     description: The application deployment name
@@ -31,7 +27,7 @@ spec:
   - name: KUSTOMIZE_GIT_URL
     type: string
     description: The kustomize git repository url
-    default: http://homework-gitea.gpte-hw-cicd.svc:3000/lbarry-redhat.com-t4f2h/coffee-shop-final-lab.git
+    default: http://homework-gitea.gpte-hw-cicd.svc:3000/lbarry-redhat.com-fcrp7/coffee-shop-final-lab.git
   - name: KUSTOMIZE_GIT_REVISION
     type: string
     default: master
@@ -55,7 +51,7 @@ spec:
   - name: NAMESPACE_DEV
     type: string
     description: Namespace where the buildconfig is located
-    default: t4f2h-dev-coffeeshop
+    default: fcrp7-dev-coffeeshop
   results:
   - name: image-tag
     description: The Production Image Tag
@@ -147,22 +143,16 @@ spec:
     - tag-image-for-development
     taskRef:
       kind: ClusterTask
-      name: tkn
+      name: openshift-client
     params:
     - name: ARGS
       value:
-      - pipeline
-      - start
-      - deploy-quarkus-application
-      - --param
-      - NAMESPACE=$(params.NAMESPACE_DEV)
-      - --param
-      - APP_NAME=$(params.APP_NAME)
-      - --param
-      - DEPLOY_SERVERLESS=$(params.DEPLOY_SERVERLESS)
-      - --param
-      - IMAGE=image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE_DEV)/$(params.APP_NAME):dev-$(tasks.generate-tag.results.image-tag)
-      - --showlog
+      - set
+      - image
+      - deployment
+      - $(params.APP_NAME)
+      - $(params.APP_NAME)=image-registry.openshift-image-registry.svc:5000/$(params.NAMESPACE_DEV)/$(params.APP_NAME):dev-$(tasks.generate-tag.results.image-tag)
+      - -n $(params.NAMESPACE_DEV)
 
   - name: tag-image-for-production
     runAfter:

@@ -4,3 +4,6 @@ This repository holds the template for the Final Lab for the Advanced Applicatio
 
 The files in this repository use placeholders (GUID, OCP_USERNAME, ...) that are replaced as this repository is forked into
 the final lab Gitea instance. It will therefore not deploy without changes from this repository.
+
+
+Lab Instructions: (Click Here)[https://start.learning.redhat.com/totara/3704]
