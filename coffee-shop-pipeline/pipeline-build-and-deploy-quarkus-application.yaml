@@ -56,6 +56,9 @@ spec:
     type: string
     description: Namespace where the buildconfig is located
     default: fcrp7-dev-coffeeshop
+  - name: NAMESPACE_PROD
+    description: Prod Namespace
+    default: fcrp7-prod-coffeeshop
   results:
   - name: image-tag
     description: The Production Image Tag
@@ -203,8 +206,6 @@ spec:
       kind: ClusterTask
       name: tkn
     params:
-    - name: NAMESPACE_PROD
-      value: fcrp7-prod-coffeeshop
     - name: ARGS
       value:
       - "pipeline"
@@ -215,7 +216,7 @@ spec:
       - "--param"
       - "APP_NAME=$(params.APP_NAME)"
       - "--param"
-      - "NAMESPACE=$(NAMESPACE_PROD)"
+      - "NAMESPACE=$(params.NAMESPACE_PROD)"
       - --param
       - "IMAGE=homework-nexus-registry.gpte-hw-cicd.svc:5000/$(params.OCP_USER)-$(params.APP_NAME):prod-$(tasks.generate-tag.results.image-tag)"
       - "--showlog"
