@@ -6,4 +6,4 @@ The files in this repository use placeholders (GUID, OCP_USERNAME, ...) that are
 the final lab Gitea instance. It will therefore not deploy without changes from this repository.
 
 
-Lab Instructions: (Click Here)[https://start.learning.redhat.com/totara/3704]
+Lab Instructions: https://start.learning.redhat.com/totara/3704

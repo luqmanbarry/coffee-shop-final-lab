@@ -29,6 +29,7 @@ spec:
       - input: "$(params.DEPLOY_SERVERLESS)"
         operator: in
         values: ["false"]
+    timeout: "0h1m0s"
     taskRef:
       kind: ClusterTask
       name: openshift-client
@@ -47,7 +48,7 @@ spec:
       - input: "$(params.DEPLOY_SERVERLESS)"
         operator: in
         values: ["true"]
-    retries: 1
+    timeout: "0h1m0s"
     taskRef:
       kind: ClusterTask
       name: kn
@@ -58,5 +59,6 @@ spec:
       - "update"
       - "$(params.APP_NAME)"
       - "--image=$(params.IMAGE)"
+      - "--no-wait"
       - "--namespace"
       - "$(params.NAMESPACE)"
