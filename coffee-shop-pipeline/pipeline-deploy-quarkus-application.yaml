@@ -53,8 +53,8 @@ spec:
     params:
     - name: ARGS
       value:
-      - service
-      - update
-      - $(params.APP_NAME)
+      - "service"
+      - "update"
+      - "$(params.APP_NAME)"
       - "--image=$(params.IMAGE)"
-      - -n $(params.NAMESPACE)
+      - "-n $(params.NAMESPACE)"
