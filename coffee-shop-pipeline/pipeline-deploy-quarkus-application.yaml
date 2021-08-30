@@ -47,6 +47,7 @@ spec:
       - input: "$(params.DEPLOY_SERVERLESS)"
         operator: in
         values: ["true"]
+    retries: 1
     taskRef:
       kind: ClusterTask
       name: kn
@@ -57,4 +58,5 @@ spec:
       - "update"
       - "$(params.APP_NAME)"
       - "--image=$(params.IMAGE)"
-      - "-n $(params.NAMESPACE)"
+      - "--namespace"
+      - "$(params.NAMESPACE)"
